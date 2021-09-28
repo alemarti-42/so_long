@@ -10,45 +10,65 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
+#include<stdlib.h>
 #include <mlx.h>
 #include "so_long.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+/* void	my_mlx_pixel_put(t_data *data, int x, int y, int color); */
+
+int		move_player(int keycode, t_game game)
+{
+
+}
+int	key_hook(int keycode, t_data *img)
+{
+	static int	pos_x = 0;
+	static int	pos_y = 0;
+
+	printf("Hello from key_hook!%d\n", keycode);
+	if (keycode == 1)
+	{
+		move_player(keycode, )
+	}
+	if (keycode == 53)
+	{
+		mlx_destroy_window(img->mlx_p, img->win_p);
+		exit(0);
+	}
+	return (0);
+}
 
 int	main(int argc, char* argv[])
 {
-	t_data	img;
-	void*	mlx_p;
-	void*	win_p;
-	int i_width;
-	int i_height;
+	t_game		game;
+
 	char *path;
 
 	path = "./sprites/barrel.xpm";
 	argc = 0;
 	argv = 0;
 
-	mlx_p = mlx_init();
-	win_p = mlx_new_window(mlx_p, 1920, 1080, "so_long");
-	img.img = mlx_new_image(mlx_p, 1920, 1080);
+	
+	//img.img = mlx_new_image(screen.mlx_p, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	while (argc++ < 1000)
-	my_mlx_pixel_put(&img, argc, argc,  0x00FF0000);
-	mlx_put_image_to_window(mlx_p, win_p, img.img, 0, 0);
-	img.img = mlx_xpm_file_to_image(mlx_p, path, &i_width, &i_height);
-	mlx_put_image_to_window(mlx_p, win_p, img.img, 50, 50);
-	while (argc++ < 1000)
-	my_mlx_pixel_put(img.img, argc, argc,  0x00FF0000);
-	mlx_put_image_to_window(mlx_p, win_p, img.img, 0, 0);
-	mlx_loop(mlx_p);
+	
+		//mlx_put_image_to_window(mlx_p, win_p, img.img, argc, argc);
+	img.img = mlx_xpm_file_to_image(screen.mlx_p, path, &img.i_width, &img.i_height);
+	//mlx_put_image_to_window(screen.mlx_p, screen.win_p, img.img, 50, 50);
+	mlx_key_hook(img.win_p, key_hook, &img);
+	mlx_loop(img.mlx_p);
 
 	return(0);
 }
 
+
+/* 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char*	dst;
 
 	dst = data->addr +(y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
+} */
