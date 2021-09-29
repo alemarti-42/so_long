@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		=	main.c \
+SRCS		=	so_long.c \
 
 
 OBJS		= ${SRCS:.c=.o}
@@ -36,6 +36,7 @@ ${NAME}:	${OBJS} ${LIBFT}
 ${LIBFT}:
 			make -C ./libft/ libft.a
 
+
 clean:
 			@${RM} ${OBJS}
 			@make -C ./libft/ clean
@@ -47,4 +48,4 @@ fclean:		clean
 
 re:			fclean all
 
-PHONY:		all bonus clean fclean re leaks 
+PHONY:		all bonus clean fclean re

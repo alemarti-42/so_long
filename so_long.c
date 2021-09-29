@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -44,13 +44,12 @@ int	main(int argc, char* argv[])
 {
 	t_game		game;
 
-	char *path;
-
-	path = "./sprites/barrel.xpm";
 	argc = 0;
 	argv = 0;
 
-	
+	if (argc != 2)
+		exit (1);
+	game = game_init(argv[1]);
 	//img.img = mlx_new_image(screen.mlx_p, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	

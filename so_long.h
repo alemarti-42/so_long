@@ -14,6 +14,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <mlx.h>
+#include "libft.h"
+#include "get_next_line.h"
 
 /*
 	t_data stores an image with its properties.
@@ -49,14 +51,24 @@ typedef struct s_screen
 typedef struct s_game
 {
 	t_screen	screen;
-	t_data		wall;
-	t_data		floor;
-	t_data		player;
-	t_data		finish;
-	t_data		collectible;
+	t_data*		wall;
+	t_data*		floor;
+	t_data*		player;
+	t_data*		finish;
+	t_data*		collectible;
 	int			player_x;
 	int			player_y;
 	char**		map; 
 }	t_game;
+
+typedef struct s_map_flags
+{
+	int	player;
+	int	exit;
+	int	collectibles;
+	int	enclosed;
+	int	height;
+	int	width;
+}	t_map_flags
 
 #endif
