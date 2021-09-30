@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:41:24 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/30 16:48:06 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/09/30 19:50:52 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,34 @@ int	main(int argc, char* argv[])
 int		game_master(char* map_path)
 {
 	t_game*	game;
+	//int		moves;
 
 	game = game_init(map_path);
-
-
+	mlx_key_hook(game->screen->win_p, key_hook, &game);
+	
 	mlx_loop(game->screen->mlx_p);
-
 	game_destroy(game);
 	return (0);
 }
 
+int	key_hook(int keycode, t_game* game)
+{
+	//printf("Moves from key_hook1: %d\n", game->moves);
 
+	if (keycode == 53)
+		exit(0);
+	else if (keycode == 13)
+		move_up( game);
+	else if (keycode == 1)
+		move_down( game);
+	else if (keycode == 0)
+		move_left( game);
+	else if (keycode == 2)
+		move_right( game);
+//	game->moves--;
+	ft_putnbr_fd(game->moves, 0);
+	return (0);
+}
 /* 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {

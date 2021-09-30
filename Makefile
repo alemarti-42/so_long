@@ -6,7 +6,7 @@
 #    By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/27 15:31:10 by alemarti          #+#    #+#              #
-#    Updated: 2021/09/30 16:49:16 by alemarti         ###   ########.fr        #
+#    Updated: 2021/09/30 19:47:46 by alemarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ SRCS		=	so_long.c			\
 				so_long_utils.c		\
 				load_config.c		\
 				map_utils.c			\
-				game_destroy.c
+				game_destroy.c		\
+				player_move.c
 
 
 OBJS		= ${SRCS:.c=.o}
@@ -35,7 +36,7 @@ all:		${NAME}
 bonus:		all
 
 ${NAME}:	${OBJS} ${LIBFT}
-			${CC} ${CFLAGS} ${MLXFLAGS} ${OBJS} ${LIBFT} -o ${NAME} 
+			${CC} ${CFLAGS}  ${MLXFLAGS} ${OBJS} ${LIBFT} -o ${NAME} 
 
 ${LIBFT}:
 			make -C ./libft/ libft.a
@@ -51,5 +52,10 @@ fclean:		clean
 			@make -C ./libft/ fclean
 
 re:			fclean all
+
+test:		${OBJS} ${LIBFT}
+			${CC} ${CFLAGS} ${DBFLAGS} ${MLXFLAGS} ${OBJS} ${LIBFT} -o ${NAME} 
+
+retest:		fclean test
 
 PHONY:		all bonus clean fclean re

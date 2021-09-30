@@ -6,11 +6,25 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 16:05:11 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/30 16:51:56 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/09/30 18:39:33 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+//TESTING-----------------------------------------
+void print_split(char **str)
+{
+	int i = 0;
+
+	while(str[i])
+	{
+		ft_putstr_fd("\nLINEA:", 0);
+		ft_putstr_fd(str[i], 0);
+		i++;
+	}
+}
+//TESTING-----------------------------------------
 
 int		parse_map(t_game* game, char* map_path)
 {
@@ -20,7 +34,7 @@ int		parse_map(t_game* game, char* map_path)
 	int		fd;
 
 	
-	map_raw = NULL;
+	map_raw = (char*)ft_calloc(1, sizeof(char));
 	swap = NULL;
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
@@ -28,17 +42,26 @@ int		parse_map(t_game* game, char* map_path)
 		perror("File access failed");
 		return (-1);
 	}
-	buffer = (char *)malloc(sizeof(char) * 100);
-	buffer[99] = 0;
-	while(read(fd, &buffer, 99))
+	buffer = (char*)ft_calloc(100, sizeof(char));
+	//(char *)malloc(sizeof(char) * 100);
+	//buffer[99] = 0;
+	//if (buffer == NULL || map_raw == NULL)
+	while(read(fd, buffer, 99) > 0)
 	{
+		//ft_putstr_fd(buffer, 0);
 		swap = ft_strjoin(map_raw, buffer);
+		//while (1);
 		free(map_raw);
 		map_raw = swap;
+		ft_bzero(buffer, 100);
+		
 	}
+	ft_putstr_fd(map_raw, 0);
 	free(buffer);
 	close(fd);
+	
 	game->map = ft_split(map_raw, '\n');
+	//print_split(game->map);
 	free(map_raw);
 	//if (map_is_valid(game->map) == -1)
 	

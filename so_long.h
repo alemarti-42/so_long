@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/30 16:51:25 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/09/30 20:10:15 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_map_flags
 
 // so_long.c
 int			game_master(char* map_path);
+int			key_hook(int keycode, t_game* game);
 
 // so_long_utils.c
 void		exit_with_error(char* str);
@@ -95,6 +96,12 @@ int			game_destroy(t_game* game);
 void		screen_destroy(t_screen* screen);
 void		data_destroy(t_data* data);
 void		map_destroy(char** map);
+
+// player_move.c
+int move_up(t_game* game);
+int move_down(t_game* game);
+int move_left(t_game* game);
+int move_right(t_game* game);
 
 
 /* 

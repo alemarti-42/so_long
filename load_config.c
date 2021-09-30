@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 17:10:13 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/30 16:50:12 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/09/30 19:35:06 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ t_game*		game_init(char* map_path)
 	t_game*	game;
 
 	game = (t_game*)malloc(sizeof(t_game));
-	if (game == NULL || parse_map(game, map_path) == -1 )
+	if (game == NULL || parse_map(game, map_path) == -1)
 		exit_with_error("game_init error");
 	game->screen = (t_screen*)malloc(sizeof(t_screen));
+	game->moves = 0;
 
 //	load_sprites(game);			//TODO
 	screen_init(game);
-
+	//printf("Moves from key_hook: %d\n", game->moves);
 	
 	
 	return (game);
@@ -38,10 +39,14 @@ t_game*		game_init(char* map_path)
 
 void	screen_init(t_game* game)
 {
+	
 	game->screen->mlx_p = mlx_init();
-	game->screen->win_p = mlx_new_window(game->screen->mlx_p, game->screen->height, game->screen->width, "so_long");
+	game->screen->win_p = mlx_new_window(game->screen->mlx_p, 1920, 
+	1080, "so_long");
+	//game->screen->win_p = mlx_new_window(game->screen->mlx_p, game->screen->width, game->screen->height, "so_long");
 	/* if (game->screen->win_p == NULL || game->screen->mlx_p = NULL)
 		exit_with_error("Screen handler fail"); */
+		
 }
 
 
