@@ -3,14 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alemarti <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/27 15:31:10 by alemarti          #+#    #+#              #
-#    Updated: 2021/09/27 15:39:56 by alemarti         ###   ########.fr        #
+#    Updated: 2021/09/30 16:49:16 by alemarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		=	so_long.c \
+SRCS		=	so_long.c			\
+				so_long_utils.c		\
+				load_config.c		\
+				map_utils.c			\
+				game_destroy.c
 
 
 OBJS		= ${SRCS:.c=.o}

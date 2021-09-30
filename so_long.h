@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alemarti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/27 17:21:57 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/09/30 16:51:25 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include <mlx.h>
-#include "libft.h"
-#include "get_next_line.h"
+# include "./libft/libft.h"
 
 /*
 	t_data stores an image with its properties.
@@ -50,7 +51,7 @@ typedef struct s_screen
 
 typedef struct s_game
 {
-	t_screen	screen;
+	t_screen*	screen;
 	t_data*		wall;
 	t_data*		floor;
 	t_data*		player;
@@ -58,6 +59,7 @@ typedef struct s_game
 	t_data*		collectible;
 	int			player_x;
 	int			player_y;
+	int			moves;
 	char**		map; 
 }	t_game;
 
@@ -69,6 +71,37 @@ typedef struct s_map_flags
 	int	enclosed;
 	int	height;
 	int	width;
-}	t_map_flags
+}	t_map_flags;
+
+// so_long.c
+int			game_master(char* map_path);
+
+// so_long_utils.c
+void		exit_with_error(char* str);
+
+
+// load_config.c
+t_game*		game_init(char* map_path);
+void		screen_init(t_game* game);
+
+
+// map_utils.c
+
+int		parse_map(t_game* game, char* map_path);
+//int		map_is_valid(char** map);
+
+// game_destroy.c
+int			game_destroy(t_game* game);
+void		screen_destroy(t_screen* screen);
+void		data_destroy(t_data* data);
+void		map_destroy(char** map);
+
+
+/* 
+// sprites_utils.c
+int		load_sprites(t_game* game);
+void	load_texture(t_game* game, t_data* data, char* path);
+
+ */
 
 #endif
