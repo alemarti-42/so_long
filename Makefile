@@ -6,7 +6,7 @@
 #    By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/27 15:31:10 by alemarti          #+#    #+#              #
-#    Updated: 2021/10/01 15:51:02 by alemarti         ###   ########.fr        #
+#    Updated: 2021/10/01 18:42:08 by alemarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRCS		=	so_long.c			\
 				load_config.c		\
 				map_utils.c			\
 				game_destroy.c		\
-				player_move.c
+				player_move.c		\
+				sprites_utils.c
 
 
 OBJS		= ${SRCS:.c=.o}

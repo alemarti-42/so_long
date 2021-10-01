@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 17:35:29 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:18:13 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_data
 {
 	void*	img;
 	char*	addr;
-	int		bits_per_pixel;
+	int		bbp;
 	int		line_length;
 	int		endian;
 	int		width;
@@ -111,11 +111,11 @@ int 		move_right(t_game* game);
 int			move_player(t_game* game, int mov_x, int mov_y);
 
 
-/* 
+ 
 // sprites_utils.c
 int		load_sprites(t_game* game);
 void	load_texture(t_game* game, t_data* data, char* path);
 
- */
+ 
 
 #endif

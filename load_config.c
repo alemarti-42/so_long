@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 17:10:13 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 17:23:49 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:41:22 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_game*		game_init(char* map_path)
 	game->screen = (t_screen*)malloc(sizeof(t_screen));
 	game->moves = 0;
 
-//	load_sprites(game);			//TODO
+	load_sprites(game);			//TODO
 	screen_init(game);
 	//printf("Moves from key_hook: %d\n", game->moves);
 	

@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:45:03 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/30 17:59:08 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:57:58 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	int		i;
 	int		j;
 
-	ft_putstr_fd("\tBUG\n", 0);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	ft_putstr_fd("\tBUG\n", 0);
 	res = (char *)malloc(size);
 	if (!res)
 		return (NULL);
