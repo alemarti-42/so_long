@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:41:24 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/30 19:50:52 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 14:58:00 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	main(int argc, char* argv[])
 	int		control;
 
 	if (argc != 2)
-		exit_with_error("Wrong number of parameters");
+		exit_with_error("Wrong number of parameters", NULL);
 
 	control = game_master(argv[1]);
 	if (control == -1)
-		exit_with_error("Wrong config");
+		exit_with_error("Wrong config", NULL);
 	return(0);
 }
 
@@ -37,6 +37,8 @@ int		game_master(char* map_path)
 	//int		moves;
 
 	game = game_init(map_path);
+	if (!game)
+		return (-1);
 	mlx_key_hook(game->screen->win_p, key_hook, &game);
 	
 	mlx_loop(game->screen->mlx_p);
@@ -49,7 +51,9 @@ int	key_hook(int keycode, t_game* game)
 	//printf("Moves from key_hook1: %d\n", game->moves);
 
 	if (keycode == 53)
+	{
 		exit(0);
+	}
 	else if (keycode == 13)
 		move_up( game);
 	else if (keycode == 1)

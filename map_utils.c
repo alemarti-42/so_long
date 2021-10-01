@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 16:05:11 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/30 18:39:33 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:06:51 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void print_split(char **str)
 
 	while(str[i])
 	{
-		ft_putstr_fd("\nLINEA:", 0);
+		printf("\nLINEA:[%d]\n", i);
 		ft_putstr_fd(str[i], 0);
 		i++;
 	}
@@ -33,7 +33,8 @@ int		parse_map(t_game* game, char* map_path)
 	char*	buffer;
 	int		fd;
 
-	
+	if (check_ber(map_path) == -1)
+		exit_with_error("Not .ber file", NULL);
 	map_raw = (char*)ft_calloc(1, sizeof(char));
 	swap = NULL;
 	fd = open(map_path, O_RDONLY);
@@ -48,6 +49,7 @@ int		parse_map(t_game* game, char* map_path)
 	//if (buffer == NULL || map_raw == NULL)
 	while(read(fd, buffer, 99) > 0)
 	{
+		
 		//ft_putstr_fd(buffer, 0);
 		swap = ft_strjoin(map_raw, buffer);
 		//while (1);
@@ -56,50 +58,104 @@ int		parse_map(t_game* game, char* map_path)
 		ft_bzero(buffer, 100);
 		
 	}
-	ft_putstr_fd(map_raw, 0);
 	free(buffer);
 	close(fd);
-	
+	/* if (ft_strlen(map_raw) == 0)
+	{
+		free(map_raw);
+		exit_with_error("Empty map", game);
+	} */
 	game->map = ft_split(map_raw, '\n');
 	//print_split(game->map);
 	free(map_raw);
-	//if (map_is_valid(game->map) == -1)
-	
+	if (map_is_valid(game->map) == -1)
+		return (-1);
 	return (0);
 }
 
-/* int		map_is_valid(char** map)
+int	check_ber(char* map_path)
+{
+	int	len;
+	
+	len = ft_strlen(map_path);
+	if (ft_strncmp(&map_path[len - 4], ".ber", 4) != 0)
+	{
+		return (-1);
+		printf("ES BER\n");
+	}
+	printf("NO ES BER\n");
+	return (0);
+}
+
+int		map_is_valid(char** map)
 {
 
 	int	line_length;
 	int	line_count;
+	int	player;
+	int	exit;
+	int	collectibles;
+	int enclosed;
+	int	i;
+	int	map_height;
 
 	
-	line_count = 0;
-	line_length = ft_strlen(map[0]);
-
-
-
-	while (map[line_count] != NULL)
+	
+	if (*map == NULL)
 	{
-		if (ft_strlen(map[line_count]) != line_length)
+		perror("Empty map");
+		return (-1);
+	}
+	line_length = ft_strlen(*map);
+	map_height = get_map_height(map);
+
+	player = 0;
+	exit = 0;
+	collectibles = 0;
+	enclosed = 0;
+	line_count = 0;
+	i = 0;
+
+
+	while (map[line_count])
+	{
+		while (map[line_count][i])
 		{
-			perror("Error: Map not rectangular");
-			exit(MAP_ERROR);
+			if ((line_count == 0 || line_count == map_height - 1 || i == 0 || i == line_length - 1) && map[line_count][i] != '1')
+				return(-1);
+			if (map[line_count][i] == 'P')
+				player++;
+			if (map[line_count][i] == 'E')
+				exit++;
+			if (map[line_count][i] == 'C')
+				collectibles++;
+			i++;
 		}
-		if (str_is_in_set(set, map[line_count]) == -1)
-		{
-			perror("Error: Wrong map characters");
-			exit(MAP_ERROR);
-		}
+		i = 0;
 		line_count++;
 	}
-
-
-	
-	check_all_elements(map);
+	map_height = line_count;
+	printf("\nMAP_PARSE\n\tmap_h:\t%d\n\tmap_w:\t%d\n\tpla:\t%d\n\tex:\t%d\n\tcoll:\t%d\n\tlinlen:\t%d\n", map_height, line_length, player, exit, collectibles, line_length);
 	return (0);
+
+
+
+} 
+
+int	get_map_height(char** map)
+{
+	int	i;
+
+	i = 0;
+	while(map[i])
+	{
+		printf("\nLINEA:[%d]\t%s\n", i, map[i]);
+		i++;
+	}
+	return (i);
 }
+
+/*
 
 
 

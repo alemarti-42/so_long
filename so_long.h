@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/09/30 20:10:15 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:03:59 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			game_master(char* map_path);
 int			key_hook(int keycode, t_game* game);
 
 // so_long_utils.c
-void		exit_with_error(char* str);
+void		exit_with_error(char* str, t_game* game);
 
 
 // load_config.c
@@ -88,8 +88,10 @@ void		screen_init(t_game* game);
 
 // map_utils.c
 
-int		parse_map(t_game* game, char* map_path);
-//int		map_is_valid(char** map);
+int			parse_map(t_game* game, char* map_path);
+int			map_is_valid(char** map);
+int			get_map_height(char** map);
+int	check_ber(char* map_path);
 
 // game_destroy.c
 int			game_destroy(t_game* game);
@@ -98,10 +100,10 @@ void		data_destroy(t_data* data);
 void		map_destroy(char** map);
 
 // player_move.c
-int move_up(t_game* game);
-int move_down(t_game* game);
-int move_left(t_game* game);
-int move_right(t_game* game);
+int 		move_up(t_game* game);
+int 		move_down(t_game* game);
+int 		move_left(t_game* game);
+int 		move_right(t_game* game);
 
 
 /* 
