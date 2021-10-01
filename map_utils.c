@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 16:05:11 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 17:36:50 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:25:44 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ int	get_map_height(char** map)
 	i = 0;
 	while(map[i])
 	{
-		printf("\nLINEA:[%d]\t%s\n", i, map[i]);
 		i++;
 	}
 	return (i);

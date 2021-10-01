@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:41:24 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 17:45:35 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:28:45 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		game_master(char* map_path)
 	if (!game)
 		return (-1);
 	mlx_key_hook(game->screen->win_p, key_hook, game);
-	
+	mlx_hook(game->screen->win_p, 17, 0, game_destroy, game);
 	mlx_loop(game->screen->mlx_p);
 	game_destroy(game);
 	return (0);
@@ -49,10 +49,10 @@ int		game_master(char* map_path)
 int	key_hook(int keycode, t_game* game)
 {
 	//printf("Moves from key_hook1: %d\n", game->moves);
-	printf("\nPlayer posistion[3]: %d , %d\n", game->player_x, game->player_y);
 
 	if (keycode == 53)
 	{
+		game_destroy(game);
 		exit(0);
 	}
 	else if (keycode == 13)		
@@ -67,6 +67,7 @@ int	key_hook(int keycode, t_game* game)
 		return (-1); */
 //	game->moves--;
 	print_split(game->map);
+	ft_putnbr_fd(game->moves, 0);
 	printf ("\n%d\tCollectibles left\n%d\tMoves\n", game->collectibles, game->moves);
 	return (0);
 }

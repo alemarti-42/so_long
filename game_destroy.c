@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 15:44:57 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 14:57:20 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:25:11 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ int	game_destroy(t_game* game)
 {
 	if (game == NULL)
 		return (0);
-	printf("\ngame:%p\nscr:%p\nwin:%p\nmlx:%p\n", game, game->screen, game->screen->mlx_p, game->screen->win_p);
-	// screen_destroy(game->screen);
-	data_destroy(game->wall);
-	data_destroy(game->floor);
-	data_destroy(game->player);
-	data_destroy(game->finish);
-	data_destroy(game->collectible);
-	map_destroy(game->map);
+	//printf("\n[DESTROY]\ngame:%p\nscr:%p\nwin:%p\nmlx:%p\n", game, game->screen, game->screen->mlx_p, game->screen->win_p);
+	screen_destroy(game->screen);
+	//data_destroy(game->wall);
+	//data_destroy(game->floor);
+	//data_destroy(game->player);
+	//data_destroy(game->finish);
+	//data_destroy(game->collectible);
+	//map_destroy(game->map);
 	free(game);
-	return (0);
+	exit (0);
 }
 
 void		screen_destroy(t_screen* screen)
