@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 17:10:13 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 14:25:24 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:23:49 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ t_game*		game_init(char* map_path)
 
 	game = (t_game*)malloc(sizeof(t_game));
 	if (game == NULL)
-		perror("malloc error");
+		perror("Memory error");
 	if (parse_map(game, map_path) == -1)
 	{
-		//exit_with_error("Wrong map", NULL);
+		ft_putendl_fd("Map error", 2);
 		return (NULL);
 	}
+
 	game->screen = (t_screen*)malloc(sizeof(t_screen));
 	game->moves = 0;
 

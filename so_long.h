@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 15:03:59 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:35:29 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_game
 	int			player_x;
 	int			player_y;
 	int			moves;
+	int			collectibles;
 	char**		map; 
 }	t_game;
 
@@ -79,6 +80,7 @@ int			key_hook(int keycode, t_game* game);
 
 // so_long_utils.c
 void		exit_with_error(char* str, t_game* game);
+int		return_with_error(char* str);
 
 
 // load_config.c
@@ -89,9 +91,11 @@ void		screen_init(t_game* game);
 // map_utils.c
 
 int			parse_map(t_game* game, char* map_path);
-int			map_is_valid(char** map);
+int			map_is_valid(t_game* game);
 int			get_map_height(char** map);
 int	check_ber(char* map_path);
+
+void print_split(char **str);
 
 // game_destroy.c
 int			game_destroy(t_game* game);
@@ -104,6 +108,7 @@ int 		move_up(t_game* game);
 int 		move_down(t_game* game);
 int 		move_left(t_game* game);
 int 		move_right(t_game* game);
+int			move_player(t_game* game, int mov_x, int mov_y);
 
 
 /* 

@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:41:24 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 14:58:00 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:45:35 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		game_master(char* map_path)
 	game = game_init(map_path);
 	if (!game)
 		return (-1);
-	mlx_key_hook(game->screen->win_p, key_hook, &game);
+	mlx_key_hook(game->screen->win_p, key_hook, game);
 	
 	mlx_loop(game->screen->mlx_p);
 	game_destroy(game);
@@ -49,21 +49,25 @@ int		game_master(char* map_path)
 int	key_hook(int keycode, t_game* game)
 {
 	//printf("Moves from key_hook1: %d\n", game->moves);
+	printf("\nPlayer posistion[3]: %d , %d\n", game->player_x, game->player_y);
 
 	if (keycode == 53)
 	{
 		exit(0);
 	}
-	else if (keycode == 13)
-		move_up( game);
-	else if (keycode == 1)
-		move_down( game);
-	else if (keycode == 0)
-		move_left( game);
-	else if (keycode == 2)
-		move_right( game);
+	else if (keycode == 13)		
+		game->moves += move_up(game);
+	else if (keycode == 1)		
+		game->moves += move_down(game);
+	else if (keycode == 0)		
+		game->moves += move_left(game);
+	else if (keycode == 2)		
+		game->moves += move_right(game);
+/* 	else
+		return (-1); */
 //	game->moves--;
-	ft_putnbr_fd(game->moves, 0);
+	print_split(game->map);
+	printf ("\n%d\tCollectibles left\n%d\tMoves\n", game->collectibles, game->moves);
 	return (0);
 }
 /* 
