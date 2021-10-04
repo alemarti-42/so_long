@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 16:05:11 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/04 15:27:30 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 19:03:47 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int		map_is_valid(t_game* game)
 		return(return_with_error("Empty file"));
 	game->map_width = ft_strlen(*game->map);
 	game->map_height = get_map_height(game->map);
+	if (game->map_height > 21 || game->map_width > 40)
+		return(return_with_error("Map too large. Max 21 x 40"));
 
 	player = 0;
 	exit = 0;

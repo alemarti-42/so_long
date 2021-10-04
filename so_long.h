@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/04 17:50:33 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 18:58:22 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,4 @@ int	draw_map(t_game* game);
 int	print_window_cell(t_game* game, char c, int i, int j);
 int	put_sprite(t_game* game, t_data* sprite, int pos_x , int pos_y);
 
-#endif
+#endif 
