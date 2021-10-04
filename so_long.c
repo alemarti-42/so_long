@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:41:24 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/04 15:13:23 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 16:12:44 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	key_hook(int keycode, t_game* game)
 	print_split(game->map);
 	ft_putnbr_fd(game->moves, 0);
 	printf ("\n%d\tCollectibles left\n%d\tMoves\n", game->collectibles, game->moves);
+//	draw_map(game);
 	return (0);
 }
 /* 

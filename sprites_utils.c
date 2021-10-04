@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 15:00:58 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/04 14:49:49 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 15:33:37 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ void	load_texture(t_game* game, t_data* data, char* path)
 //	path = 0;
 	data->width = 0;
 	data->height = 0;
+	printf("\naddr1:%p\n", data->addr);
 	//printf("\nPUNTEROS[%s]\nmlx: %p\ndata->img: %p\nw: %d\nh: %d\n",path, game->screen->mlx_p, data->img, data->width, data->height);
 	//printf("\nPATH\npath: %s\nw: %p\nh: %p\n", path, &data->width, &data->height);
+
 	data->img = mlx_xpm_file_to_image(game->screen->mlx_p, path, &data->width, &data->height);
-	//data->addr = mlx_get_data_addr(data->img, &data->bbp, &data->line_length, &data->endian);
+	data->addr = mlx_get_data_addr(data->img, &data->bbp, &data->line_length, &data->endian);
+
+	printf("\naddr2:%p\n", data->addr);
 
 	printf("\nPUNTEROS[%s]\nmlx: %p\ndata->img: %p\nw: %d\nh: %d\n",path, game->screen->mlx_p, data->img, data->width, data->height);
 	printf("\n##########################\n\n");

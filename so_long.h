@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/04 15:16:43 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 17:50:33 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ int			key_hook(int keycode, t_game* game);
 
 // so_long_utils.c
 void		exit_with_error(char* str, t_game* game);
-int		return_with_error(char* str);
+int			return_with_error(char* str);
 
 
 // load_config.c
 t_game*		game_init(char* map_path);
+int			buffer_init(t_game* game);
 void		screen_init(t_game* game);
 
 
@@ -107,9 +108,13 @@ int			move_player(t_game* game, int mov_x, int mov_y);
 
  
 // sprites_utils.c
-int		load_sprites(t_game* game);
-void	load_texture(t_game* game, t_data* data, char* path);
+int			load_sprites(t_game* game);
+void		load_texture(t_game* game, t_data* data, char* path);
 
- 
+//draw_utils.c
+int	draw_map(t_game* game);
+//int	print_buffer_cell(t_data* buffer, t_data* sprite, int pos_x, int pos_y);
+int	print_window_cell(t_game* game, char c, int i, int j);
+int	put_sprite(t_game* game, t_data* sprite, int pos_x , int pos_y);
 
 #endif
