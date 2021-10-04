@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:41:24 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 18:28:45 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 15:13:23 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int	key_hook(int keycode, t_game* game)
 		game->moves += move_left(game);
 	else if (keycode == 2)		
 		game->moves += move_right(game);
-/* 	else
-		return (-1); */
+ 	 else
+		return (0);  
 //	game->moves--;
+	
 	print_split(game->map);
 	ft_putnbr_fd(game->moves, 0);
 	printf ("\n%d\tCollectibles left\n%d\tMoves\n", game->collectibles, game->moves);

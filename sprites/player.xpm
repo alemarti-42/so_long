@@ -1,5 +1,5 @@
 
-static char *kniga0[] = {
+static char *knight[] = {
 "64 64 44 1 ",
 "  c black",
 ". c #202020",

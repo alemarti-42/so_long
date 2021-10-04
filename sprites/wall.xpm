@@ -1,6 +1,5 @@
 /* XPM */
 static char *barrel[] = {
-/* columns rows colors chars-per-pixel */
 "64 64 27 1 ",
 "  c none",
 ". c gray11",

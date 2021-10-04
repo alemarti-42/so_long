@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 19:18:13 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 15:16:43 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,29 @@ typedef struct s_screen
 	int		width;
 	int		height;
 }	t_screen;
-
 /*
 	t_game encapsulates the rest of structures as the player position.
 */
 
 typedef struct s_game
 {
-	t_screen*	screen;
-	t_data*		wall;
-	t_data*		floor;
-	t_data*		player;
-	t_data*		finish;
-	t_data*		collectible;
-	int			player_x;
-	int			player_y;
-	int			moves;
-	int			collectibles;
-	char**		map; 
+	t_screen*		screen;
+	t_data*			wall;
+	t_data*			floor;
+	t_data*			player;
+	t_data*			finish;
+	t_data*			collectible;
+	t_data*			buffer;
+	char**			map;
+	int				player_x;
+	int				player_y;
+	int				moves;
+	int				collectibles;
+	int				map_width;
+	int				map_height;
 }	t_game;
 
-typedef struct s_map_flags
-{
-	int	player;
-	int	exit;
-	int	collectibles;
-	int	enclosed;
-	int	height;
-	int	width;
-}	t_map_flags;
+
 
 // so_long.c
 int			game_master(char* map_path);

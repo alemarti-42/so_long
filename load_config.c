@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 17:10:13 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 18:41:22 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 14:50:59 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ t_game*		game_init(char* map_path)
 	game->screen = (t_screen*)malloc(sizeof(t_screen));
 	game->moves = 0;
 
-	load_sprites(game);			//TODO
+			//TODO
 	screen_init(game);
+	if (load_sprites(game) == -1)
+		exit_with_error("Fail loading sprites", game);
+	
 	//printf("Moves from key_hook: %d\n", game->moves);
 	
 	

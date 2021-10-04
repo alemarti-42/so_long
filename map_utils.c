@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 16:05:11 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 18:25:44 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/04 15:27:30 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void print_split(char **str)
 	while(str[i])
 	{
 		//printf("\nLINEA:[%d]\n", i);
-		ft_putendl_fd(str[i], 0);
+		printf("\n%s\n", str[i]);
+		//ft_putendl_fd(str[i], 0);
 		i++;
 	}
 }
@@ -84,20 +85,19 @@ int	check_ber(char* map_path)
 int		map_is_valid(t_game* game)
 {
 
-	int	line_length;
+
 	int	line_count;
 	int	player;
 	int	exit;
 	int enclosed;
 	int	i;
-	int	map_height;
 
 	
-	line_length = ft_strlen(game->map[0]);
+	
 	if (game->map == NULL)
 		return(return_with_error("Empty file"));
-	line_length = ft_strlen(*game->map);
-	map_height = get_map_height(game->map);
+	game->map_width = ft_strlen(*game->map);
+	game->map_height = get_map_height(game->map);
 
 	player = 0;
 	exit = 0;
@@ -111,9 +111,9 @@ int		map_is_valid(t_game* game)
 	{
 		while (game->map[line_count][i])
 		{
-			if (ft_strlen(game->map[line_count]) != (size_t)line_length)
+			if (ft_strlen(game->map[line_count]) != (size_t)game->map_width)
 				return(return_with_error("Not rectangular map"));
-			if ((line_count == 0 || line_count == map_height - 1 || i == 0 || i == line_length - 1) && game->map[line_count][i] != '1')
+			if ((line_count == 0 || line_count == game->map_height - 1 || i == 0 || i == game->map_width - 1) && game->map[line_count][i] != '1')
 				return(return_with_error("Not enclosed map"));
 			else if (game->map[line_count][i] == 'P')
 			{
@@ -134,10 +134,10 @@ int		map_is_valid(t_game* game)
 		line_count++;
 	}
 	
-	map_height = line_count;
+	game->map_height = line_count;
 	if (player != 1 || exit != 1 || game->collectibles < 1)
 		return(return_with_error("Wrong number of some elements"));
-	printf("\nMAP_PARSE\n\tmap_h:\t%d\n\tmap_w:\t%d\n\tpla:\t%d\n\tex:\t%d\n\tcoll:\t%d\n\tlinlen:\t%d\n", map_height, line_length, player, exit, game->collectibles, line_length);
+	//printf("\nMAP_PARSE\n\tmap_h:\t%d\n\tmap_w:\t%d\n\tpla:\t%d\n\tex:\t%d\n\tcoll:\t%d\n\tlinlen:\t%d\n", game->map_height, game->map_width, player, exit, game->collectibles, game->map_width);
 	return (0);
 
 
