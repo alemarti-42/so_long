@@ -6,14 +6,13 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 15:44:57 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/01 18:25:11 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:40:30 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "so_long.h"
 
-int	game_destroy(t_game* game)
+int	game_destroy(t_game *game)
 {
 	if (game == NULL)
 		return (0);
@@ -29,23 +28,22 @@ int	game_destroy(t_game* game)
 	exit (0);
 }
 
-void		screen_destroy(t_screen* screen)
+void	screen_destroy(t_screen *screen)
 {
 	mlx_destroy_window(screen->mlx_p, screen->win_p);
 }
 
-void		data_destroy(t_data* data)
+void	data_destroy(t_data *data)
 {
 	data = NULL;
-	//free(data);
 }
 
-void		map_destroy(char** map)
+void	map_destroy(char **map)
 {
 	int	i;
 
 	i = 0;
-	while(map[i])
+	while (map[i])
 	{
 		free(map[i]);
 		i++;
