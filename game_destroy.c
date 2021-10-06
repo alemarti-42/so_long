@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 15:44:57 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/06 14:29:54 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:09:56 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	game_destroy(t_game *game)
 	map_destroy(game->map);
 	free(game);
 	return (0);
+}
+
+int	game_safe_kill(t_game *game)
+{
+	game_destroy(game);
+	exit(0);
 }
 
 void	screen_destroy(t_screen *screen)

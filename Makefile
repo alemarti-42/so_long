@@ -6,7 +6,7 @@
 #    By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/27 15:31:10 by alemarti          #+#    #+#              #
-#    Updated: 2021/10/06 14:17:12 by alemarti         ###   ########.fr        #
+#    Updated: 2021/10/06 17:54:57 by alemarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ SRCS		=	so_long.c			\
 				so_long_utils.c		\
 				load_config.c		\
 				map_utils.c			\
+				check_map_utils.c	\
 				game_destroy.c		\
 				player_move.c		\
 				sprites_utils.c		\

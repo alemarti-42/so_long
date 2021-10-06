@@ -6,13 +6,12 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:21:55 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/06 15:23:24 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:58:50 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <mlx.h>
@@ -25,10 +24,6 @@
 typedef struct s_data
 {
 	void	*img;
-	char	*addr;
-	int		bbp;
-	int		line_length;
-	int		endian;
 	int		width;
 	int		height;
 }	t_data;
@@ -65,7 +60,7 @@ typedef struct s_map_flags
 {
 	int	player;
 	int	exit;
-	int	enclosed;
+	int	collectibles;
 }	t_map_flags;
 
 //so_long.c
@@ -78,21 +73,24 @@ int			return_with_error(char *str);
 
 // load_config.c
 t_game		*game_init(char *map_path);
-int			buffer_init(t_game *game);
 void		screen_init(t_game *game);
 
 // map_utils.c
 
 int			parse_map(t_game *game, char *map_path);
-
 char		*read_raw(char *map_path);
-int			map_is_valid(t_game *game);
-int			check_map_size(t_game *game);
-int			get_map_height(char **map);
 int			check_ber(char *map_path);
+int			map_is_valid(t_game *game);
+
+//check_map_utils.c
+int			update_flags(t_game *game, t_map_flags *flags, int line, int col);
+int			check_map_size(t_game *game);
+int			check_elements(t_map_flags flags);
+int			get_map_height(char **map);
 
 // game_destroy.c
 int			game_destroy(t_game *game);
+int			game_safe_kill(t_game *game);
 void		screen_destroy(t_screen *screen);
 void		data_destroy(t_game *game, t_data *data);
 void		map_destroy(char **map);
@@ -110,7 +108,6 @@ void		load_texture(t_game *game, t_data *data, char *path);
 
 //draw_utils.c
 int			draw_map(t_game *game);
-//int	print_buffer_cell(t_data* buffer, t_data* sprite, int pos_x, int pos_y);
 int			print_window_cell(t_game *game, char c, int i, int j);
 int			put_sprite(t_game *game, t_data *sprite, int pos_x, int pos_y);
 

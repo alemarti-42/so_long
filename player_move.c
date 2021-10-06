@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 19:39:39 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/05 14:53:22 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:52:59 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	move_player(t_game *game, int mov_x, int mov_y)
 	int	new_x;
 	int	new_y;
 
-	if (game->collectibles == -1)
-		return (0);
 	new_x = game->player_x + mov_x;
 	new_y = game->player_y + mov_y;
 	if (game->map[new_y][new_x] == 'E' && game->collectibles != 0)
@@ -52,6 +50,8 @@ int	move_player(t_game *game, int mov_x, int mov_y)
 	game->map[game->player_y][game->player_x] = '0';
 	print_window_cell(game, '0', game->player_x, game->player_y);
 	print_window_cell(game, 'P', new_x, new_y);
+	if (game->collectibles == -1)
+		print_window_cell(game, 'E', new_x, new_y);
 	game->player_x = new_x;
 	game->player_y = new_y;
 	game->map[game->player_y][game->player_x] = 'P';

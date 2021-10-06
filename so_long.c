@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:41:24 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/06 14:46:56 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:52:26 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	main(int argc, char *argv[])
 {
-	int		control;
-
 	if (argc != 2)
 		exit_with_error("Wrong number of parameters", NULL);
-	control = game_master(argv[1]);
-	if (control == -1)
+	if (game_master(argv[1]) == -1)
 		exit_with_error("Error on game", NULL);
 	return (0);
 }
@@ -32,7 +29,7 @@ int	game_master(char *map_path)
 	if (!game)
 		return (-1);
 	mlx_key_hook(game->screen->win_p, key_hook, game);
-	mlx_hook(game->screen->win_p, 17, 0, game_destroy, game);
+	mlx_hook(game->screen->win_p, 17, 0, game_safe_kill, game);
 	mlx_loop(game->screen->mlx_p);
 	game_destroy(game);
 	return (0);
@@ -41,11 +38,10 @@ int	game_master(char *map_path)
 int	key_hook(int keycode, t_game *game )
 {
 	if (keycode == 53)
-	{
-		game_destroy(game);
-		exit(0);
-	}
-	else if (keycode == 13)
+		game_safe_kill(game);
+	if (game->collectibles == -1)
+		return (0);
+	if (keycode == 13)
 		game->moves += move_up(game);
 	else if (keycode == 1)
 		game->moves += move_down(game);

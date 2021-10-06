@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 17:10:13 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/06 14:23:11 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:26:29 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ t_game	*game_init(char *map_path)
 	if (parse_map(game, map_path) == -1)
 	{
 		free(game);
-		ft_putendl_fd("Map error", 2);
 		exit (1);
 	}
 	game->screen = malloc (sizeof(t_screen));
 	game->moves = 0;
 	screen_init(game);
 	if (load_sprites(game) == -1)
-		exit_with_error("Fail loading sprites", game);
+		exit_with_error("Failure loading sprites", game);
 	draw_map(game);
 	return (game);
 }
