@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 16:05:11 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/06 15:26:02 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 15:31:23 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	map_is_valid(t_game *game)
 		{
 			if ((lines == 0 || i == game->map_width - 1 || lines == \
 			 game->map_height - 1 || i == 0 ) && game->map[lines][i] != '1')
-				return (return_with_error("Not flags.enclosed map"));
+				return (return_with_error("Not enclosed map"));
 			else if (game->map[lines][i] == 'P')
 			{
 				game->player_x = i;
