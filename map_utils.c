@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 16:05:11 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/05 14:35:16 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 15:26:02 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,12 @@
 int	parse_map(t_game *game, char *map_path)
 {
 	char	*map_raw;
-	char	*swap;
-	char	*buffer;
-	int		fd;
 
 	if (check_ber(map_path) == -1)
 		return (return_with_error("Wrong file extension .ber"));
-	map_raw = ft_calloc(1, sizeof(char));
-	swap = NULL;
-	fd = open(map_path, O_RDONLY);
-	if (fd < 0)
-		return (return_with_error("File access failed"));
-	buffer = ft_calloc(100, sizeof(char));
-	while (read(fd, buffer, 99) > 0)
-	{
-		swap = ft_strjoin(map_raw, buffer);
-		free(map_raw);
-		map_raw = swap;
-		ft_bzero(buffer, 100);
-	}
-	free(buffer);
-	close(fd);
+	map_raw = read_raw(map_path);
+	if (map_raw == NULL)
+		return (return_with_error("Failure parsing map"));
 	if (ft_strlen(map_raw) == 0)
 	{
 		free(map_raw);
@@ -59,7 +44,33 @@ int	parse_map(t_game *game, char *map_path)
 	free(map_raw);
 	if (map_is_valid(game) == -1)
 		return (return_with_error("Invalid map"));
+	printf("\nWidth:\t%d\nHeight:\t%d\n", game->map_width, game->map_height);
 	return (0);
+}
+
+char	*read_raw(char *map_path)
+{
+	char	*map_raw;
+	char	*buffer;
+	char	*swap;
+	int		fd;
+
+	fd = open(map_path, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	map_raw = ft_calloc(1, sizeof(char));
+	buffer = ft_calloc(100, sizeof(char));
+	swap = NULL;
+	while (read(fd, buffer, 99) > 0)
+	{
+		swap = ft_strjoin(map_raw, buffer);
+		free(map_raw);
+		map_raw = swap;
+		ft_bzero(buffer, 100);
+	}
+	free(buffer);
+	close(fd);
+	return (map_raw);
 }
 
 int	check_ber(char *map_path)
@@ -74,55 +85,61 @@ int	check_ber(char *map_path)
 
 int	map_is_valid(t_game *game)
 {
-	int	line_count;
-	int	player;
-	int	exit;
-	int	enclosed;
-	int	i;
+	t_map_flags	flags;
+	int			lines;
+	int			i;
 
+	flags.player = 0;
+	flags.exit = 0;
+	flags.enclosed = 0;
+	lines = 0;
+	i = 0;
 	if (game->map == NULL)
 		return (return_with_error("Empty file"));
-	game->map_width = ft_strlen(*game->map);
-	game->map_height = get_map_height(game->map);
-	if (game->map_height > 21 || game->map_width > 40)
-		return (return_with_error("Map too large. Max 21 x 40"));
-	player = 0;
-	exit = 0;
-	enclosed = 0;
-	line_count = 0;
-	i = 0;
+	if (check_map_size(game) == -1)
+		return (return_with_error("Wrong map size"));
 	game->collectibles = 0;
-	while (game->map[line_count])
+	while (game->map[lines])
 	{
-		while (game->map[line_count][i])
+		if (ft_strlen(game->map[lines]) != (size_t)game->map_width)
+			return (return_with_error("Not rectangular map"));
+		while (game->map[lines][i])
 		{
-			if (ft_strlen(game->map[line_count]) != (size_t)game->map_width)
-				return (return_with_error("Not rectangular map"));
-			if ((line_count == 0 || \
-			 line_count == game->map_height - 1 || i == 0 || \
-			 i == game->map_width - 1) && game->map[line_count][i] != '1')
-				return (return_with_error("Not enclosed map"));
-			else if (game->map[line_count][i] == 'P')
+			if ((lines == 0 || i == game->map_width - 1 || lines == \
+			 game->map_height - 1 || i == 0 ) && game->map[lines][i] != '1')
+				return (return_with_error("Not flags.enclosed map"));
+			else if (game->map[lines][i] == 'P')
 			{
 				game->player_x = i;
-				game->player_y = line_count;
-				player++;
+				game->player_y = lines;
+				flags.player++;
 			}
-			else if (game->map[line_count][i] == 'E')
-				exit++;
-			else if (game->map[line_count][i] == 'C')
+			else if (game->map[lines][i] == 'E')
+				flags.exit++;
+			else if (game->map[lines][i] == 'C')
 				game->collectibles++;
-			else if (game->map[line_count][i] != '0' && \
-			 game->map[line_count][i] != '1')
+			else if (game->map[lines][i] != '0' && \
+			 game->map[lines][i] != '1')
 				return (return_with_error("Not allowed characters"));
 			i++;
 		}
 		i = 0;
-		line_count++;
+		lines++;
 	}
-	game->map_height = line_count;
-	if (player != 1 || exit != 1 || game->collectibles < 1)
+	game->map_height = lines;
+	if (flags.player != 1 || flags.exit != 1 || game->collectibles < 1)
 		return (return_with_error("Wrong number of some elements"));
+	return (0);
+}
+
+int	check_map_size(t_game *game)
+{
+	game->map_width = ft_strlen(*game->map);
+	game->map_height = get_map_height(game->map);
+	if (game->map_height > 21 )
+		return (return_with_error("Map too tall. Max 21"));
+	if (game->map_width > 40)
+		return (return_with_error("Map too wide. Max 40"));
 	return (0);
 }
 

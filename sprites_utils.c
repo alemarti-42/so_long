@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 15:00:58 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/05 14:44:17 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 13:18:32 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	load_texture(t_game *game, t_data *data, char *path)
 {
 	data->width = 0;
 	data->height = 0;
-	printf("\naddr1:%p\n", data->addr);
 	data->img = mlx_xpm_file_to_image(game->screen->mlx_p, path, \
 	 &data->width, &data->height);
 	data->addr = mlx_get_data_addr(data->img, &data->bbp, \

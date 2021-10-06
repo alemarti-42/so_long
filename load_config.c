@@ -6,7 +6,7 @@
 /*   By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 17:10:13 by alemarti          #+#    #+#             */
-/*   Updated: 2021/10/05 14:58:25 by alemarti         ###   ########.fr       */
+/*   Updated: 2021/10/06 14:23:11 by alemarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,8 @@ t_game	*game_init(char *map_path)
 	screen_init(game);
 	if (load_sprites(game) == -1)
 		exit_with_error("Fail loading sprites", game);
-	if (buffer_init(game) == -1)
-		exit_with_error("Fail initializing buffer image", game);
 	draw_map(game);
 	return (game);
-}
-
-int	buffer_init(t_game *game)
-{
-	game->buffer = malloc(sizeof(t_data));
-	if (game->buffer == NULL)
-		return (-1);
-	game->buffer->img = mlx_new_image(game->screen->mlx_p, \
-	 game->screen->width, game->screen->height);
-	game->buffer->addr = mlx_get_data_addr(game->buffer->img, \
-	 &game->buffer->bbp, &game->buffer->line_length, &game->buffer->endian);
-	return (0);
 }
 
 void	screen_init(t_game *game)

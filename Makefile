@@ -6,7 +6,7 @@
 #    By: alemarti <alemarti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/27 15:31:10 by alemarti          #+#    #+#              #
-#    Updated: 2021/10/04 16:38:44 by alemarti         ###   ########.fr        #
+#    Updated: 2021/10/06 14:17:12 by alemarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ all:		${NAME}
 bonus:		all
 
 ${NAME}:	${OBJS} ${LIBFT}
-			${CC} ${CFLAGS}  ${MLXFLAGS} ${OBJS} ${LIBFT} -o ${NAME} 
+			${CC} ${CFLAGS} ${MLXFLAGS} ${OBJS} ${LIBFT} -o ${NAME} 
 
 ${LIBFT}:
 			make -C ./libft/ libft.a
